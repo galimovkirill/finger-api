@@ -7,13 +7,18 @@
   "scripts": {
     "dev": "nodemon src/main.ts",
     "build": "rimraf ./build && npx tsc",
-    "start": "npm run build && node build/main"
+    "start": "npm run build && node build/main",
+    "lint": "npx eslint ./src",
+    "format": "npx eslint ./src --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.11.10",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.29.0",
     "nodemon": "^2.0.20",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
