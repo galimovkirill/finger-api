@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 const router = express.Router();
-router.use('/users', userRoutes);
+router.use('/user', userRoutes);
 
 app.use('/api', router);
 
