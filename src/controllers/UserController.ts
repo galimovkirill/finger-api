@@ -54,6 +54,21 @@ class UserController {
         }
     }
 
+    async getUserData(req: Request, res: Response) {
+        try {
+            if (!req.user) {
+                return res.sendStatus(403);
+            }
+
+            const { data } = req.user;
+            const user = await User.findOne({ email: data });
+
+            res.json({ user });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async getUsers(req: Request, res: Response) {
         try {
             const users = await User.find({});

@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import dayjs from 'dayjs';
 
 import dotenv from 'dotenv';
+import { Request } from 'express';
 dotenv.config();
 
 export const generateAccessToken = (data = '') => {
@@ -17,4 +18,9 @@ export const generateAccessToken = (data = '') => {
 
 export const generateAccessTokenExpireDate = () => {
     return dayjs().add(1, 'month').valueOf();
+};
+
+export const getAccessTokenFromRequest = (req: Request) => {
+    const authHeader = req.headers.authorization;
+    return authHeader ? authHeader.split(' ')[1] : null;
 };

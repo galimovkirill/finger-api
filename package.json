@@ -10,7 +10,7 @@
         }
     },
     "scripts": {
-        "dev": "nodemon src/main.ts",
+        "dev": "nodemon --files src/main.ts",
         "build": "rimraf ./build && npx tsc",
         "start": "npm run build && node build/main",
         "lint": "npx eslint ./src",
