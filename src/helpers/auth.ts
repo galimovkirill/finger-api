@@ -3,9 +3,10 @@ import dayjs from 'dayjs';
 
 import dotenv from 'dotenv';
 import { Request } from 'express';
+import { IGeneratedAccessToken } from '../types/user.js';
 dotenv.config();
 
-export const generateAccessToken = (data = '') => {
+export const generateAccessToken = (data = ''): IGeneratedAccessToken => {
     const secret = process.env.JWT_SECRET_KEY || '';
     const expireDate = generateAccessTokenExpireDate();
     const token = jwt.sign({ data, exp: expireDate }, secret);

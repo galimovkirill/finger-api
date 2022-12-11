@@ -1,22 +1,15 @@
 import express from 'express';
 import mongoose from 'mongoose';
-
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger/swagger.json' assert { type: 'json' };
+
+import router from './routes/router.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
 app.use(express.json());
-
-/**
- * Base routes
- */
-import userRoutes from './routes/UserRoutes.js';
-
-const router = express.Router();
-router.use('/user', userRoutes);
 
 /**
  * Swagger

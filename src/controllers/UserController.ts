@@ -3,15 +3,16 @@ import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import { generateAccessToken } from '../helpers/auth.js';
 import { UserDto } from '../models/User.dto.js';
+import { IGeneratedAccessToken, IUser } from '../types/user.js';
 
 class UserController {
-    async signUp(req: Request, res: Response) {
+    async signUp(req: Request<unknown, unknown, Pick<IUser, 'email' | 'name' | 'password'>>, res: Response<{ data: UserDto }>) {
         try {
             const { email, name, password } = req.body;
 
             const isExist = await User.findOne({ email });
             if (isExist) {
-                return res.status(400).json({ message: 'User already exist' });
+                return res.sendStatus(409);
             }
 
             const salt = bcrypt.genSaltSync(10);
@@ -22,27 +23,27 @@ class UserController {
 
             const newUser = new UserDto(user);
 
-            return res.json({
-                message: 'User has been successfully created',
-                data: newUser
-            });
+            return res.json({ data: newUser });
         } catch (error) {
             console.log(error);
         }
     }
 
-    async signIn(req: Request, res: Response) {
+    async signIn(
+        req: Request<unknown, unknown, Pick<IUser, 'email' | 'password'>>,
+        res: Response<IGeneratedAccessToken & { user: UserDto }>
+    ) {
         try {
             const { email, password } = req.body;
             const user = await User.findOne({ email }).select('+password');
 
             if (!user) {
-                return res.status(400).json({ message: 'User not found' });
+                return res.sendStatus(404);
             }
 
             const isValidPassword = bcrypt.compareSync(password, user.password);
             if (!isValidPassword) {
-                return res.status(400).json({ message: 'Invalid password' });
+                return res.sendStatus(401);
             }
 
             const newUser = new UserDto(user);
@@ -54,7 +55,7 @@ class UserController {
         }
     }
 
-    async getUserData(req: Request, res: Response) {
+    async getUserData(req: Request, res: Response<{ user: IUser }>) {
         try {
             if (!req.user) {
                 return res.sendStatus(403);
@@ -62,6 +63,10 @@ class UserController {
 
             const { data } = req.user;
             const user = await User.findOne({ email: data });
+
+            if (!user) {
+                return res.status(404);
+            }
 
             res.json({ user });
         } catch (error) {

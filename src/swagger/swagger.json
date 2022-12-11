@@ -6,10 +6,9 @@
     "description": "Finger | Документация API"
   },
   "host": "localhost:3001",
-  "basePath": "/",
+  "basePath": "/api",
   "schemes": [
-    "http",
-    "https"
+    "http"
   ],
   "securityDefinitions": {
     "Authorization": {
@@ -18,21 +17,8 @@
       "name": "Authorization"
     }
   },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "paths": {
-    "/api/swagger": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/api/user/sign-up": {
+    "/user/sign-up": {
       "post": {
         "description": "",
         "parameters": [
@@ -65,37 +51,14 @@
         }
       }
     },
-    "/api/user/sign-in": {
+    "/user/sign-in": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
+        "parameters": [],
+        "responses": {}
       }
     },
-    "/api/user/data": {
+    "/user/data": {
       "get": {
         "description": "",
         "parameters": [],
@@ -109,7 +72,7 @@
         }
       }
     },
-    "/api/user/all": {
+    "/user/all": {
       "get": {
         "description": "",
         "parameters": [],

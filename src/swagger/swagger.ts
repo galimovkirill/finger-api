@@ -10,9 +10,6 @@ const doc = {
     },
     host: 'localhost:3001',
     basePath: '/api',
-    schemes: ['http', 'https'],
-    consumes: ['application/json'],
-    produces: ['application/json'],
     securityDefinitions: {
         Authorization: {
             type: 'Bearer',
@@ -23,6 +20,6 @@ const doc = {
 };
 
 const outputFile = './swagger.json';
-const endpointsFiles = ['./src/main.ts'];
+const endpointsFiles = ['./src/routes/router.ts'];
 
 swagger(outputFile, endpointsFiles, doc);
