@@ -23,5 +23,5 @@ export const generateAccessTokenExpireDate = () => {
 
 export const getAccessTokenFromRequest = (req: Request) => {
     const authHeader = req.headers.authorization;
-    return authHeader ? authHeader.split(' ')[1] : null;
+    return authHeader ? authHeader : null;
 };

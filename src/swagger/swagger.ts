@@ -12,7 +12,6 @@ const doc = {
     basePath: '/api',
     securityDefinitions: {
         Authorization: {
-            type: 'Bearer',
             in: 'header',
             name: 'Authorization'
         }
