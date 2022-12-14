@@ -21,34 +21,8 @@
     "/user/sign-up": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "example": "any"
-                },
-                "name": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
+        "parameters": [],
+        "responses": {}
       }
     },
     "/user/sign-in": {
@@ -63,9 +37,6 @@
         "description": "",
         "parameters": [],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "403": {
             "description": "Forbidden"
           }

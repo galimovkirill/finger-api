@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger/swagger.json' assert { type: 'json' };
 
-import router from './routes/router.js';
+import router from './routes/_router.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
