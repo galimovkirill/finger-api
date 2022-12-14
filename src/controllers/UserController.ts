@@ -6,7 +6,14 @@ import { UserDto } from '../models/User.dto.js';
 import { IGeneratedAccessToken, IUser } from '../types/user.js';
 
 class UserController {
-    async signUp(req: Request<unknown, unknown, Pick<IUser, 'email' | 'name' | 'password'>>, res: Response<{ data: UserDto }>) {
+    async signUp(
+        req: Request<unknown, unknown, Pick<IUser, 'email' | 'name' | 'password'>>,
+        res: Response<{
+            accessToken: IGeneratedAccessToken['accessToken'];
+            accessTokenExpiredAt: IGeneratedAccessToken['accessTokenExpiredAt'];
+            user: UserDto;
+        }>
+    ) {
         try {
             const { email, name, password } = req.body;
 
@@ -22,8 +29,9 @@ class UserController {
             await user.save();
 
             const newUser = new UserDto(user);
+            const { accessToken, accessTokenExpiredAt } = generateAccessToken(user.email);
 
-            return res.json({ data: newUser });
+            return res.json({ accessToken, accessTokenExpiredAt, user: newUser });
         } catch (error) {
             console.log(error);
         }
