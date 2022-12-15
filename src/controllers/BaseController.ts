@@ -1,31 +1,15 @@
 import { Request, Response } from 'express';
-import fetch from 'node-fetch';
-import { ICurrency } from '../types/base.js';
+import { ICurrency } from '../types/currency.js';
+import { getAllCurrencies } from './utils/common.js';
 
 class BaseController {
     constructor() {
         this.getBase = this.getBase.bind(this);
     }
 
-    async getCurrencies() {
-        try {
-            const response = await fetch('https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.min.json');
-            const currencies = (await response.json()) as { [key: string]: string };
-
-            const result: ICurrency[] = [];
-            Object.keys(currencies).forEach((code) => {
-                result.push({ code, name: currencies[code] });
-            });
-
-            return result;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     async getBase(req: Request, res: Response<{ currencies: ICurrency[] }>) {
         try {
-            const currencies = await this.getCurrencies();
+            const currencies = await getAllCurrencies();
 
             if (!currencies) {
                 return res.sendStatus(403);
