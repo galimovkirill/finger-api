@@ -1,3 +1,4 @@
-export interface ICurrencies {
-    [key: string]: string;
+export interface ICurrency {
+    name: string;
+    code: string;
 }
