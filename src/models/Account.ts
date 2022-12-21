@@ -7,7 +7,7 @@ const AccountSchema = new Schema<IAccount>(
         initialBalance: { type: Number, default: 0 },
         balance: { type: Number, default: 0 },
         currencyCode: { type: String, ref: 'Currency', index: true, required: true },
-        userRef: { type: Schema.Types.ObjectId, ref: 'User', required: true }
+        userRef: { type: Schema.Types.ObjectId, ref: 'User', required: true, select: false }
     },
     {
         versionKey: false

@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
+import { AccountDto } from '../models/Account.dto.js';
 import Account from '../models/Account.js';
 import Currency from '../models/Currency.js';
-import { IAccount, IAccountCandidate } from '../types/account.js';
+import { IAccountCandidate } from '../types/account.js';
 import { getCurrentUser } from './utils/common.js';
 
 class AccountController {
-    async createAccount(req: Request<unknown, unknown, IAccountCandidate>, res: Response<{ account: IAccount }>) {
+    async createAccount(req: Request<unknown, unknown, IAccountCandidate>, res: Response<{ account: AccountDto }>) {
         try {
             const { name, currencyCode, initialBalance } = req.body;
 
@@ -27,7 +28,19 @@ class AccountController {
             const account = new Account({ name, currencyCode: currency.code, initialBalance, balance: initialBalance, userRef: user._id });
             await account.save();
 
-            return res.json({ account });
+            const newAccount = new AccountDto(account);
+
+            return res.json({ account: newAccount });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async deleteAccount(req: Request, res: Response) {
+        try {
+            const { accountId } = req.body;
+            await Account.findByIdAndDelete(accountId);
+            return res.sendStatus(200);
         } catch (error) {
             console.log(error);
         }

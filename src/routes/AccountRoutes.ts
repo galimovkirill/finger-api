@@ -6,5 +6,6 @@ const router = Router();
 
 router.post('/create', authMiddleware, controller.createAccount);
 router.get('/all', authMiddleware, controller.getAccounts);
+router.delete('/delete', authMiddleware, controller.deleteAccount);
 
 export default router;
