@@ -8,5 +8,6 @@ import { Currency } from 'src/core/currencies/currencies.model';
   providers: [CurrenciesService],
   controllers: [CurrenciesController],
   imports: [SequelizeModule.forFeature([Currency])],
+  exports: [CurrenciesService],
 })
 export class CurrenciesModule {}

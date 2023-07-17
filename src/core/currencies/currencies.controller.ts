@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Currency } from 'src/core/currencies/currencies.model';
 import { CurrenciesService } from 'src/core/currencies/currencies.service';
 
@@ -11,8 +11,13 @@ export class CurrenciesController {
     return this.currencyService.createCurrency(currency);
   }
 
-  @Post('/create/all')
-  createCurrenciesFromList(@Body() list: [string, string, string][]) {
-    return this.currencyService.createCurrenciesFromList(list);
+  @Get('/all')
+  getAllCurrencies() {
+    return this.currencyService.getAllCurrencies();
   }
+
+  // @Post('/create/all')
+  // createCurrenciesFromList(@Body() list: [string, string, string][]) {
+  //   return this.currencyService.createCurrenciesFromList(list);
+  // }
 }
