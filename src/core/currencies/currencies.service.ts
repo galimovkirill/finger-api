@@ -12,4 +12,21 @@ export class CurrenciesService {
     const currency = await this.currencyRepository.create(currencyToCreate);
     return currency;
   }
+
+  async createCurrenciesFromList(list: [string, string, string][]) {
+    const res: Currency[] = [];
+
+    await Promise.all(
+      list.map(async (item) => {
+        const [name, code, symbol] = item;
+
+        const newCurrency = Currency.build({ code, name, symbol });
+        await newCurrency.save();
+
+        res.push(newCurrency);
+      }),
+    );
+
+    return res;
+  }
 }

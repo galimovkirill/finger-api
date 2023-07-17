@@ -10,4 +10,9 @@ export class CurrenciesController {
   createCurrency(@Body() currency: Currency) {
     return this.currencyService.createCurrency(currency);
   }
+
+  @Post('/create/all')
+  createCurrenciesFromList(@Body() list: [string, string, string][]) {
+    return this.currencyService.createCurrenciesFromList(list);
+  }
 }
