@@ -7,6 +7,7 @@ import { CurrenciesModule } from 'src/core/currencies/currencies.module';
 import { Currency } from 'src/core/currencies/currencies.model';
 import { Account } from 'src/core/accounts/accounts.model';
 import { AccountsModule } from 'src/core/accounts/accounts.module';
+import { AuthModule } from 'src/core/auth/auth.module';
 
 @Module({
   controllers: [],
@@ -15,6 +16,7 @@ import { AccountsModule } from 'src/core/accounts/accounts.module';
     UsersModule,
     CurrenciesModule,
     AccountsModule,
+    AuthModule,
 
     ConfigModule.forRoot({ envFilePath: `.${process.env.NODE_ENV}.env` }),
     SequelizeModule.forRoot({

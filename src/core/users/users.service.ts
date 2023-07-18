@@ -30,4 +30,9 @@ export class UsersService {
 
     return { message: 'Nothing to delete' };
   }
+
+  async getUserByEmail(email: string) {
+    const user = await this.userRepository.findOne({ where: { email } });
+    return user;
+  }
 }
