@@ -29,4 +29,9 @@ export class AccountsService {
     });
     return account;
   }
+
+  async getAccountById(id: number) {
+    const account = await this.accountRepository.findOne({ where: { id } });
+    return account;
+  }
 }

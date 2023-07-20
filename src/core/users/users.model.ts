@@ -22,6 +22,9 @@ export class User extends Model<User, CreateUserDto> {
     type: DataType.STRING,
     unique: true,
     allowNull: false,
+    validate: {
+      isEmail: true,
+    },
   })
   email: string;
 

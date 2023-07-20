@@ -10,5 +10,6 @@ import { Currency } from 'src/core/currencies/currencies.model';
   providers: [AccountsService],
   controllers: [AccountsController],
   imports: [SequelizeModule.forFeature([Account, Currency]), CurrenciesModule],
+  exports: [AccountsService],
 })
 export class AccountsModule {}
