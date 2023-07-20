@@ -28,9 +28,7 @@ export class AuthService {
     );
 
     if (candidate) {
-      throw new BadRequestException({
-        message: 'User with given email already exist',
-      });
+      throw new BadRequestException('User with given email already exist');
     }
 
     const salt = await bcryptjs.genSalt(5);
@@ -60,7 +58,7 @@ export class AuthService {
     const user = await this.usersService.getUserByEmail(loginUserDto.email);
 
     if (!user) {
-      throw new UnauthorizedException({ message: 'Wrong credentials' });
+      throw new UnauthorizedException('Wrong credentials');
     }
 
     const isValidPassword = await bcryptjs.compare(
@@ -69,7 +67,7 @@ export class AuthService {
     );
 
     if (!isValidPassword) {
-      throw new UnauthorizedException({ message: 'Wrong credentials' });
+      throw new UnauthorizedException('Wrong credentials');
     }
 
     return user;

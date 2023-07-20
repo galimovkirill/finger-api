@@ -23,12 +23,8 @@ export class UsersService {
   }
 
   async deleteUserById(id: number) {
-    const deletedRows = await this.userRepository.destroy({ where: { id } });
-    if (deletedRows > 0) {
-      return true;
-    }
-
-    return { message: 'Nothing to delete' };
+    await this.userRepository.destroy({ where: { id } });
+    return true;
   }
 
   async getUserByEmail(email: string) {
