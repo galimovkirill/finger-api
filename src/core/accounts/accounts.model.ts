@@ -6,12 +6,11 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { CreateAccountDto } from 'src/core/accounts/accounts.dto';
 import { Currency } from 'src/core/currencies/currencies.model';
 import { User } from 'src/core/users/users.model';
 
 @Table({ tableName: 'accounts' })
-export class Account extends Model<Account, CreateAccountDto> {
+export class Account extends Model<Account> {
   @Column({
     type: DataType.INTEGER,
     primaryKey: true,
@@ -20,8 +19,15 @@ export class Account extends Model<Account, CreateAccountDto> {
   })
   id: number;
 
-  // @BelongsTo(() => User, 'id')
-  // userId: number;
+  @BelongsTo(() => User)
+  user: User;
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  userId: number;
 
   @Column({
     type: DataType.STRING,
