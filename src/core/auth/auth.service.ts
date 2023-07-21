@@ -55,7 +55,10 @@ export class AuthService {
   }
 
   private async loginValidation(loginUserDto: LoginUserDto) {
-    const user = await this.usersService.getUserByEmail(loginUserDto.email);
+    const user = await this.usersService.getUserByEmail(
+      loginUserDto.email,
+      true,
+    );
 
     if (!user) {
       throw new UnauthorizedException('Wrong credentials');

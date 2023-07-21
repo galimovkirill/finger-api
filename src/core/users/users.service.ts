@@ -27,8 +27,11 @@ export class UsersService {
     return true;
   }
 
-  async getUserByEmail(email: string) {
-    const user = await this.userRepository.findOne({ where: { email } });
+  async getUserByEmail(email: string, includePassword?: boolean) {
+    const user = await this.userRepository
+      .scope(includePassword ? 'includePassword' : 'defaultScope')
+      .findOne({ where: { email } });
+
     return user;
   }
 }

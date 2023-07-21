@@ -8,6 +8,9 @@ import { CreateUserDto } from 'src/core/users/users.dto';
       exclude: ['password'],
     },
   },
+  scopes: {
+    includePassword: {},
+  },
 })
 export class User extends Model<User, CreateUserDto> {
   @Column({
