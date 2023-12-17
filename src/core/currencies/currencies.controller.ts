@@ -16,8 +16,8 @@ export class CurrenciesController {
     return this.currencyService.getAllCurrencies();
   }
 
-  // @Post('/create/all')
-  // createCurrenciesFromList(@Body() list: [string, string, string][]) {
-  //   return this.currencyService.createCurrenciesFromList(list);
-  // }
+  @Post('/create/all')
+  createCurrenciesFromList(@Body() list: [string, string, string][]) {
+    return this.currencyService.createCurrenciesFromList(list);
+  }
 }

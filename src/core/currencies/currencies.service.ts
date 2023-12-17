@@ -23,20 +23,20 @@ export class CurrenciesService {
     return currencies;
   }
 
-  // async createCurrenciesFromList(list: [string, string, string][]) {
-  //   const res: Currency[] = [];
+  async createCurrenciesFromList(list: [string, string, string][]) {
+    const res: Currency[] = [];
 
-  //   await Promise.all(
-  //     list.map(async (item) => {
-  //       const [name, code, symbol] = item;
+    await Promise.all(
+      list.map(async (item) => {
+        const [name, code, symbol] = item;
 
-  //       const newCurrency = Currency.build({ code, name, symbol });
-  //       await newCurrency.save();
+        const newCurrency = Currency.build({ code, name, symbol });
+        await newCurrency.save();
 
-  //       res.push(newCurrency);
-  //     }),
-  //   );
+        res.push(newCurrency);
+      }),
+    );
 
-  //   return res;
-  // }
+    return res;
+  }
 }

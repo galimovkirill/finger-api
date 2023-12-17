@@ -30,6 +30,13 @@ export class AccountsService {
     return account;
   }
 
+  async getAllAccounts(userId: number) {
+    const accounts = await this.accountRepository.findAll({
+      where: { userId },
+    });
+    return accounts;
+  }
+
   async getAccountById(id: number) {
     const account = await this.accountRepository.findOne({ where: { id } });
     return account;
